@@ -1,6 +1,7 @@
 import functions_framework
 import json
 import logging
+from box import Box
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -14,7 +15,8 @@ handler = SlackRequestHandler(app)
 
 @app.event("message")
 def message_channel(body, say, logger):
-    logger.info(body)
+    b = Box(body)
+    say(b.event.text)
 
 
 @functions_framework.http
